@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Arrays
 {
     class Program
     {
+        /*
         static void Main(string[] args)
         {
             // make a single dimension array
@@ -44,6 +46,111 @@ namespace Arrays
                 Console.ReadKey();
                 i++;
             }
+        }
+        */
+
+        static void Main(String[] args)
+        {
+            /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution */
+            //int i = Convert.ToInt32(Console.ReadLine());
+            string[] lines = File.ReadAllLines(@"E:\Lab\Microsoft\DotNet\Git\Arrays\Arrays\test.txt");
+
+            int i = Convert.ToInt32(lines[0]);
+            //Console.WriteLine(i);
+
+            /* SPLIT STRING TO ARRAY
+            string strLine = "sam 99912222";
+            string[] strWord = strLine.Split(' ');
+            Console.WriteLine(strWord[0]);
+            Console.WriteLine(strWord[1]);
+            foreach (var word in strWord)
+            {
+                Console.WriteLine($"{word}");
+            }
+            */
+
+
+            Dictionary<string, string> vals = new Dictionary<string, string>();
+
+            for (int j=1;j<=i;j++)
+            {
+                string strLine = lines[j];
+                string[] strWord = strLine.Split(' ');
+
+                vals.Add(strWord[0], strWord[1]);
+            }
+
+            // print dictionary
+            //foreach (KeyValuePair<string, string> val in vals)
+            //{
+            //    Console.WriteLine($"{val.Key} {val.Value}");
+            //}
+
+            int k = lines.Count();
+            //Console.WriteLine(k);
+
+            for(int x = i+1; x < k; x++)
+            {
+                string strKey = lines[x];
+                string strVal;
+
+                if (vals.TryGetValue(strKey, out strVal))
+                {
+                    Console.WriteLine(strKey + "=" + strVal);
+                }
+                else
+                {
+                    Console.WriteLine("Not found");
+                }
+
+            }
+            /*
+            $strPerson = trim(fgets($stdin));
+            while ($strPerson != ""){
+                if (array_key_exists($strPerson,$strCon))
+                {
+                    fwrite($stdout, $strPerson."=".$strCon[$strPerson]);
+                }
+                else
+                {
+                    fwrite($stdout, "Not found". "\n");
+                }
+            //Get next line.
+            $strPerson = trim(fgets($stdin));
+                    }
+             */
+
+            /*********DICTIONARY**********/
+            /*string strLine = "sam 99912222";
+            string[] strWord = strLine.Split(' ');
+
+            Dictionary<string, string> vals = new Dictionary<string, string>();
+            {         { strWord[0], strWord[1] }           };
+
+
+
+            foreach (KeyValuePair<string, string> val in vals)
+            {
+                Console.WriteLine($"Pair here: {val.Key}, {val.Value}");
+            }
+
+            // Use KeyValuePair to use foreach on Dictionary.
+            foreach (KeyValuePair<string, int> bird in birds)
+            {
+                Console.WriteLine($"Pair here: {bird.Key}, {bird.Value}");
+            }
+            */
+
+            /*********LIST**********/
+            /*var list = new List<KeyValuePair<string, string>>();
+            list.Add(new KeyValuePair<string, string>(strWord[0], strWord[1]));
+
+            foreach (var element in list)
+            {
+                Console.WriteLine(element);
+            }*/
+
+            Console.ReadKey();
         }
     }
 }
