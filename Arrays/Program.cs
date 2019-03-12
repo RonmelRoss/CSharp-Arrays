@@ -53,7 +53,32 @@ namespace Arrays
         {
             /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution */
             //int i = Convert.ToInt32(Console.ReadLine());
-            string[] lines = File.ReadAllLines(@"E:\Lab\Microsoft\DotNet\Git\Arrays\Arrays\test.txt");
+            string input = @"E:\Lab\Microsoft\DotNet\Git\Arrays\Arrays\test.txt";
+
+            listDictionary(input);
+
+            /*****************/
+            //TESTING ARRAYS
+            Console.WriteLine("\n\n\n");
+
+            //Different types of array declaration and initialization
+            double[] balance1 = new double[10];
+            double[] balance2 = { 2340.0, 4523.69, 3421.0 };
+            int[] marks1 = new int[5] { 99, 98, 92, 97, 95 };
+            int[] marks2 = new int[] { 99, 98, 92, 97, 95 };
+            Console.WriteLine("Length of balance1: "+balance1.Length);
+            Console.WriteLine("Length of balance2: "+balance2.Length);
+            Console.WriteLine("Length of marks1: "+marks1.Length);
+            Console.WriteLine("Length of marks2: "+marks2.Length);
+
+            bool balan = balance1.IsFixedSize;
+            Console.WriteLine(balan);
+            Console.ReadKey();
+        }
+        public static void listDictionary(string input)
+        {
+            string[] lines = File.ReadAllLines(input);
+
 
             int i = Convert.ToInt32(lines[0]);
             //Console.WriteLine(i);
@@ -72,7 +97,7 @@ namespace Arrays
 
             Dictionary<string, string> vals = new Dictionary<string, string>();
 
-            for (int j=1;j<=i;j++)
+            for (int j = 1; j <= i; j++)
             {
                 string strLine = lines[j];
                 string[] strWord = strLine.Split(' ');
@@ -89,7 +114,7 @@ namespace Arrays
             int k = lines.Count();
             //Console.WriteLine(k);
 
-            for(int x = i+1; x < k; x++)
+            for (int x = i + 1; x < k; x++)
             {
                 string strKey = lines[x];
                 string strVal;
@@ -149,8 +174,7 @@ namespace Arrays
             {
                 Console.WriteLine(element);
             }*/
-
-            Console.ReadKey();
         }
+
     }
 }
