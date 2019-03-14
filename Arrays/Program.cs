@@ -62,17 +62,38 @@ namespace Arrays
             Console.WriteLine("\n\n\n");
 
             //Different types of array declaration and initialization
-            double[] balance1 = new double[10];
+            double[] balance1 = new double[10]; //Array declaration. All the array elements are initialized to zero.
+            Console.WriteLine("Length of balance1: " + balance1.Length);
+
             double[] balance2 = { 2340.0, 4523.69, 3421.0 };
+            Console.WriteLine("Length of balance2: " + balance2.Length);
+
             int[] marks1 = new int[5] { 99, 98, 92, 97, 95 };
+            Console.WriteLine("Length of marks1: " + marks1.Length);
+
             int[] marks2 = new int[] { 99, 98, 92, 97, 95 };
-            Console.WriteLine("Length of balance1: "+balance1.Length);
-            Console.WriteLine("Length of balance2: "+balance2.Length);
-            Console.WriteLine("Length of marks1: "+marks1.Length);
             Console.WriteLine("Length of marks2: "+marks2.Length);
 
+            //Checking on property
             bool balan = balance1.IsFixedSize;
             Console.WriteLine(balan);
+
+            /*********/
+            //HOUR GLASS SUM ACTIVITY
+            int[][] arr = new int[6][];
+            string input1 = @"E:\Lab\Microsoft\DotNet\Git\Arrays\Arrays\2DArrays_02.txt";
+            string[] lines = File.ReadAllLines(input1);
+
+            for (int i = 0; i < 6; i++)
+            {
+                string strLine = lines[i];
+                arr[i] = Array.ConvertAll(strLine.Split(' '), arrTemp => Convert.ToInt32(arrTemp)); 
+            }
+
+            Console.WriteLine("\nHourglass Sum: "+HourGlassArray(arr));
+
+
+
             Console.ReadKey();
         }
         public static void listDictionary(string input)
@@ -175,6 +196,56 @@ namespace Arrays
                 Console.WriteLine(element);
             }*/
         }
+        public static int HourGlassArray(int[][] arr) {
+            int result = 0;
+            int arrIndex = 0;
+            //This function only works if data input is composed of 6x6 2D Array
+            int[] resultCount = new int[16];
 
+            for (int i = 0; i <= 3; i++)
+            {
+                for (int j = 0; j <= 3; j++)
+                {
+                    result += arr[i][j];
+                    result += arr[i][j + 1];
+                    result += arr[i][j + 2];
+                    result += arr[i + 1][j + 1];
+                    result += arr[i+2][j];
+                    result += arr[i+2][j + 1];
+                    result += arr[i+2][j + 2];
+
+                    resultCount[arrIndex] = result;
+                    arrIndex += 1;
+                    result = 0;
+                }
+            }
+            int z = resultCount.Max();
+
+            return z;
+        }
+        public static int HourGlassList(int[][] arr)
+        {
+            //This function does not depened on size of input data.
+            int result = 0;
+            List<int> resultCount = new List<int>();
+
+            for (int i = 0; i <= 3; i++)
+            {
+                for (int j = 0; j <= 3; j++)
+                {
+                    result += arr[i][j];
+                    result += arr[i][j + 1];
+                    result += arr[i][j + 2];
+                    result += arr[i + 1][j + 1];
+                    result += arr[i + 2][j];
+                    result += arr[i + 2][j + 1];
+                    result += arr[i + 2][j + 2];
+
+                    resultCount.Add(result);
+                    result = 0;
+                }
+            }
+            return resultCount.Max();
+        }
     }
 }
