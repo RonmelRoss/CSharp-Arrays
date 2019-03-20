@@ -92,7 +92,44 @@ namespace Arrays
 
             Console.WriteLine("\nHourglass Sum: "+HourGlassArray(arr));
 
+            #region Day19: Sorting
+            Console.WriteLine("\n\nDEMONSTRATION ON SORTING");
+            Console.Write("Input number of elements to sort: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            //Console.WriteLine("Input the numbers with spaces in between (e.g. 3 2 1)");
+            string[] a_temp = Console.ReadLine().Split(' ');
+            int[] a = Array.ConvertAll(a_temp, Int32.Parse);
 
+            // Track number of elements swapped during a single array traversal
+            int numberOfSwaps = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+
+
+                for (int j = 0; j < n - 1; j++)
+                {
+                    // Swap adjacent elements if they are in decreasing order
+                    if (a[j] > a[j + 1])
+                    {
+                        //swap(a[j], a[j + 1]);
+                        int c = a[j];
+                        a[j] = a[j + 1];
+                        a[j + 1] = c;
+                        numberOfSwaps++;
+                    }
+                }
+
+                // If no elements were swapped during a traversal, array is sorted
+                if (numberOfSwaps == 0)
+                {
+                    break;
+                }
+
+            }
+            Console.WriteLine("Array is sorted in {0} swaps.", numberOfSwaps);
+            Console.WriteLine("First Element: " + a[0] + "\nLast Element: " + a[n - 1]);
+            #endregion
 
             Console.ReadKey();
         }
