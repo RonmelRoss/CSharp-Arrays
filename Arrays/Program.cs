@@ -48,18 +48,18 @@ namespace Arrays
             }
         }
         */
-
         static void Main(String[] args)
         {
-            /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution */
+            #region Day08: Dictionaries and Maps
+            Console.WriteLine("DICTIONARIES AND MAPS");
             //int i = Convert.ToInt32(Console.ReadLine());
             string input = @"E:\Lab\Microsoft\DotNet\Git\Arrays\Arrays\test.txt";
 
             listDictionary(input);
+            #endregion
 
-            /*****************/
-            //TESTING ARRAYS
-            Console.WriteLine("\n\n\n");
+            #region Array Declaration and Initialization
+            Console.WriteLine("\nARRAY TESTING");
 
             //Different types of array declaration and initialization
             double[] balance1 = new double[10]; //Array declaration. All the array elements are initialized to zero.
@@ -73,13 +73,14 @@ namespace Arrays
 
             int[] marks2 = new int[] { 99, 98, 92, 97, 95 };
             Console.WriteLine("Length of marks2: "+marks2.Length);
-
+            
             //Checking on property
             bool balan = balance1.IsFixedSize;
             Console.WriteLine(balan);
+            #endregion
 
-            /*********/
-            //HOUR GLASS SUM ACTIVITY
+            #region Day11: 2D Arrays (Hour Glass Sum Activity)
+            Console.WriteLine("\nHOUR GLASS SUM");
             int[][] arr = new int[6][];
             string input1 = @"E:\Lab\Microsoft\DotNet\Git\Arrays\Arrays\2DArrays_02.txt";
             string[] lines = File.ReadAllLines(input1);
@@ -91,8 +92,9 @@ namespace Arrays
             }
 
             Console.WriteLine("\nHourglass Sum: "+HourGlassArray(arr));
+            #endregion
 
-            #region Day19: Sorting
+            #region Day20: Sorting
             Console.WriteLine("\n\nDEMONSTRATION ON SORTING");
             Console.Write("Input number of elements to sort: ");
             int n = Convert.ToInt32(Console.ReadLine());
@@ -112,10 +114,11 @@ namespace Arrays
                     // Swap adjacent elements if they are in decreasing order
                     if (a[j] > a[j + 1])
                     {
-                        //swap(a[j], a[j + 1]);
-                        int c = a[j];
-                        a[j] = a[j + 1];
-                        a[j + 1] = c;
+
+                        swap(ref a[j], ref a[j + 1]);
+                        //int c = a[j];
+                        //a[j] = a[j + 1];
+                        //a[j + 1] = c;
                         numberOfSwaps++;
                     }
                 }
@@ -131,8 +134,63 @@ namespace Arrays
             Console.WriteLine("First Element: " + a[0] + "\nLast Element: " + a[n - 1]);
             #endregion
 
+            #region Day21: Generics
+            try
+            {
+                Console.Write("No. of input: ");
+                int num = NumCheck.Num(Convert.ToInt32(Console.ReadLine()));
+
+                int[] intArray = new int[num];
+                for (int i = 0; i < num; i++)
+                {
+                    intArray[i] = Convert.ToInt32(Console.ReadLine());
+                }
+
+                Console.Write("No. of input: ");
+                num = Convert.ToInt32(Console.ReadLine());
+
+                string[] stringArray = new string[num];
+                for (int i = 0; i < num; i++)
+                {
+                    stringArray[i] = Console.ReadLine();
+                }
+
+                PrintArray<Int32>(intArray);
+                PrintArray<String>(stringArray);
+            }
+            //Returns exception if num is less than or equal to zero
+            catch(StringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            //Returns all other exceptions
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        #endregion
+
             Console.ReadKey();
         }
+        static void PrintArray<Int32>(int[] array)
+        {
+
+            for (int c = 0; c < array.Length; c++)
+            {
+                Console.Write(array[c]);
+            }
+            Console.WriteLine();
+        }
+        static void PrintArray<String>(string[] array)
+        {
+
+            for (int c = 0; c < array.Length; c++)
+            {
+                Console.Write(array[c]+" ");
+            }
+            Console.WriteLine();
+        }
+
         public static void listDictionary(string input)
         {
             string[] lines = File.ReadAllLines(input);
@@ -283,6 +341,32 @@ namespace Arrays
                 }
             }
             return resultCount.Max();
+        }
+        static void swap(ref int a, ref int b)
+        {
+            int c = a;
+            a = b;
+            b = c;
+        }
+    }
+    public class StringException : Exception
+    {
+        public StringException(string message) : base(message)
+        {
+        }
+    }
+    public class NumCheck
+    {
+        public static int Num(int x)
+        {
+            if (x <= 0)
+            {
+                throw (new StringException("Value should not be less than or equal to zero."));
+            }
+            else
+            {
+                return x;
+            }
         }
     }
 }
